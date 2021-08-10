@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.sharedpreferences.Utils.Companion.INPUT_AGE
+import com.example.sharedpreferences.Utils.Companion.INPUT_NAME
+import com.example.sharedpreferences.Utils.Companion.SHARED_PREF
 
 class UserActivity : AppCompatActivity() {
 
@@ -19,16 +22,13 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        preferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        preferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
 
-        viewName = findViewById(R.id.userName)
-        viewAge = findViewById(R.id.age)
-        button = findViewById(R.id.logoutButton);
+        initializeMaterialView()
 
-
-        val name = preferences.getString("NAME", "");
+        val name = preferences.getString(INPUT_NAME, "");
+        val age = preferences.getInt(INPUT_AGE, 0);
         viewName.text = name;
-        val age = preferences.getInt("AGE", 0);
         viewAge.text = "" + age
 
         button.setOnClickListener {
@@ -41,5 +41,11 @@ class UserActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun initializeMaterialView() {
+        viewName = findViewById(R.id.userName)
+        viewAge = findViewById(R.id.age)
+        button = findViewById(R.id.logoutButton);
     }
 }

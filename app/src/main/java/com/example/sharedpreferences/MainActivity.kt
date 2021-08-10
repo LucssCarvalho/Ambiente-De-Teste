@@ -7,6 +7,10 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.sharedpreferences.Utils.Companion.CHECKED
+import com.example.sharedpreferences.Utils.Companion.INPUT_AGE
+import com.example.sharedpreferences.Utils.Companion.INPUT_NAME
+import com.example.sharedpreferences.Utils.Companion.SHARED_PREF
 import com.google.android.material.textfield.TextInputEditText
 
 class MainActivity : AppCompatActivity() {
@@ -24,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initializeMaterialView()
-        sharedPreferences = getSharedPreferences("SHARED_PREF", MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences(SHARED_PREF, MODE_PRIVATE)
 
-        isRemembered = sharedPreferences.getBoolean("CHECKBOX", false)
+        isRemembered = sharedPreferences.getBoolean(CHECKED, false)
 
         if (isRemembered) {
             startNewActivity()
@@ -38,9 +42,9 @@ class MainActivity : AppCompatActivity() {
             val checked: Boolean = checked.isChecked
 
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString("NAME", name);
-            editor.putInt("AGE", age)
-            editor.putBoolean("CHECKBOX", checked);
+            editor.putString(INPUT_NAME, name);
+            editor.putInt(INPUT_AGE, age)
+            editor.putBoolean(CHECKED, checked);
             editor.apply()
 
             Toast.makeText(this, "saved", Toast.LENGTH_LONG).show()
