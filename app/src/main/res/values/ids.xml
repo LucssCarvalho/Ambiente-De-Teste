@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="inputAge" type="id" />
+    <item name="inputNamee" type="id" />
+    <item name="inputName" type="id" />
+</resources>
