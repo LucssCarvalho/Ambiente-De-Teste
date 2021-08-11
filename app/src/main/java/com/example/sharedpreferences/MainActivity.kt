@@ -41,14 +41,19 @@ class MainActivity : AppCompatActivity() {
             val age: Int = inputAge.text.toString().toInt()
             val checked: Boolean = checked.isChecked
 
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(INPUT_NAME, name);
-            editor.putInt(INPUT_AGE, age)
-            editor.putBoolean(CHECKED, checked);
-            editor.apply()
+            savePreferences(name, age, checked)
 
             Toast.makeText(this, "saved", Toast.LENGTH_LONG).show()
             startNewActivity()
+        }
+    }
+
+    private fun savePreferences(name: String, age: Int, checked: Boolean) {
+        sharedPreferences.edit().apply {
+            putString(INPUT_NAME, name);
+            putInt(INPUT_AGE, age)
+            putBoolean(CHECKED, checked);
+            apply()
         }
     }
 
