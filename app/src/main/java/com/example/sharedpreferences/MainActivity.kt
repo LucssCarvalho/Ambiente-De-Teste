@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
             savePreferences(name, age, checked)
 
+            sharedPreferences.edit().apply {
+                putString(INPUT_NAME, name)
+                putInt(INPUT_AGE, age)
+                putBoolean(CHECKED, checked)
+            }
+
+
             Toast.makeText(this, "saved", Toast.LENGTH_LONG).show()
             startNewActivity()
         }
