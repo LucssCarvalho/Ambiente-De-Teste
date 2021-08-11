@@ -26,7 +26,7 @@ class UserActivity : AppCompatActivity() {
 
         initializeMaterialView()
 
-        val name = preferences.getString(INPUT_NAME, "");
+        val name = preferences.getString(INPUT_NAME, "sem nome");
         val age = preferences.getInt(INPUT_AGE, 0);
         viewName.text = name;
         viewAge.text = "" + age
