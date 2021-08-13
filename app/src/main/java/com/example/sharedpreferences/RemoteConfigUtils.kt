@@ -1,5 +1,6 @@
 package com.example.sharedpreferences
 
+import androidx.annotation.VisibleForTesting
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
@@ -27,7 +28,8 @@ object RemoteConfigUtils {
         getFirebaseRemoteConfig()
     }
 
-    private fun getFirebaseRemoteConfig() {
+    @VisibleForTesting
+    open fun getFirebaseRemoteConfig() {
         remoteConfig = Firebase.remoteConfig
         remoteConfig.apply {
             setDefaultsAsync(DEFAULTS)
