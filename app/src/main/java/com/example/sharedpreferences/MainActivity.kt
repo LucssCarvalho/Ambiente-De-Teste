@@ -1,5 +1,6 @@
 package com.example.sharedpreferences
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,10 +9,10 @@ import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.Utils.Companion.CHECKED
-import com.example.sharedpreferences.Utils.Companion.INPUT_AGE
 import com.example.sharedpreferences.Utils.Companion.INPUT_NAME
 import com.example.sharedpreferences.Utils.Companion.SHARED_PREF
 import com.google.android.material.textfield.TextInputEditText
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var inputAge: TextInputEditText;
     lateinit var checked: CheckBox;
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,32 +38,41 @@ class MainActivity : AppCompatActivity() {
             startNewActivity()
         }
 
+        val name: String = inputName.text.toString()
+        val checked: Boolean = checked.isChecked
+
+
+
         button.setOnClickListener {
-            val name: String = inputName.text.toString()
-            val age: Int = inputAge.text.toString().toInt()
-            val checked: Boolean = checked.isChecked
-
-            savePreferences(name, age, checked)
-
-            sharedPreferences.edit().apply {
-                putString(INPUT_NAME, name)
-                putInt(INPUT_AGE, age)
-                putBoolean(CHECKED, checked)
-            }
-
 
             Toast.makeText(this, "saved", Toast.LENGTH_LONG).show()
-            startNewActivity()
+            savePreferences(name, checked)
+
         }
     }
 
-    private fun savePreferences(name: String, age: Int, checked: Boolean) {
+    private fun savePreferences(name: String, checked: Boolean) {
         sharedPreferences.edit().apply {
             putString(INPUT_NAME, name);
-            putInt(INPUT_AGE, age)
             putBoolean(CHECKED, checked);
             apply()
         }
+        startNewActivity()
+    }
+
+    private fun validadeDate(){
+        val dayInMillis = sharedPreferences.getLong(Utils.TIMER, 0)
+        val dateNow = Calendar.getInstance()
+        val lastCondigurationDate = Calendar.getInstance()
+        lastCondigurationDate.apply {
+            timeInMillis = dayInMillis
+            add(Calendar.DAY_OF_YEAR, 30)
+        }
+
+        if (lastCondigurationDate.time > dateNow.time) {
+
+        }
+
     }
 
     private fun initializeMaterialView() {
