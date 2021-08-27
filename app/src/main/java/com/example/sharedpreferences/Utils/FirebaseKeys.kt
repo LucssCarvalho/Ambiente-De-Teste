@@ -1,6 +1,6 @@
-package com.example.sharedpreferences
+package com.example.sharedpreferences.Utils
 
-class Utils {
+class FireBaseKeys {
     companion object{
         const val SHARED_PREF = "SharedPref"
         const val INPUT_NAME = "InputName"

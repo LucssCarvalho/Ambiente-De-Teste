@@ -1,5 +1,6 @@
-package com.example.sharedpreferences
+package com.example.sharedpreferences.SharePreferences
 
+import MainActivity
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -10,10 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.Utils.Companion.INPUT_AGE
-import com.example.sharedpreferences.Utils.Companion.INPUT_NAME
-import com.example.sharedpreferences.Utils.Companion.SHARED_PREF
-import com.example.sharedpreferences.Utils.Companion.TIMER
+import com.example.sharedpreferences.R
 import java.util.*
 
 class UserActivity : AppCompatActivity() {
@@ -30,13 +28,13 @@ class UserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        preferences = getSharedPreferences(SHARED_PREF, Context.MODE_PRIVATE)
+        preferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
 
         initializeMaterialView()
 
-        val name = preferences.getString(INPUT_NAME, "sem nome");
-        val age = preferences.getInt(INPUT_AGE, 0);
-        val myDate = Date(preferences.getLong(TIMER, 0))
+        val name = preferences.getString("name", "sem nome");
+        val age = preferences.getInt("age", 0);
+        val myDate = Date(preferences.getLong("timer", 0))
         tvName.text = name;
         tvAge.text = "" + age
         tvTimer.text = myDate.toString()

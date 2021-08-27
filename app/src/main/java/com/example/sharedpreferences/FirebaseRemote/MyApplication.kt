@@ -1,6 +1,7 @@
-package com.example.sharedpreferences
+package com.example.sharedpreferences.FirebaseRemote
 
 import android.app.Application
+import com.example.sharedpreferences.FirebaseRemote.RemoteConfigUtils
 
 class MyApplication : Application() {
 

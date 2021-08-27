@@ -1,5 +1,3 @@
-package com.example.sharedpreferences
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,10 +6,14 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.Utils.Companion.CHECKED
-import com.example.sharedpreferences.Utils.Companion.INPUT_NAME
-import com.example.sharedpreferences.Utils.Companion.SHARED_PREF
+import com.example.sharedpreferences.R
+import com.example.sharedpreferences.SharePreferences.UserActivity
+import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.CHECKED
+import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.INPUT_NAME
+import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.SHARED_PREF
+import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.TIMER
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.installations.Utils
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -60,8 +62,8 @@ class MainActivity : AppCompatActivity() {
         startNewActivity()
     }
 
-    private fun validadeDate(){
-        val dayInMillis = sharedPreferences.getLong(Utils.TIMER, 0)
+    private fun validadeDate() {
+        val dayInMillis = sharedPreferences.getLong("timer", 0)
         val dateNow = Calendar.getInstance()
         val lastCondigurationDate = Calendar.getInstance()
         lastCondigurationDate.apply {
