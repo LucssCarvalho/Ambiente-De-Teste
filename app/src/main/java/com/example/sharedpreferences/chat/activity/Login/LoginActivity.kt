@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.Login
+package com.example.sharedpreferences.chat.activity.Login
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -8,9 +8,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.HomeActivity
 import com.example.sharedpreferences.R
-import com.example.sharedpreferences.Register.RegisterActivity
+import com.example.sharedpreferences.chat.activity.HomeActivity
+import com.example.sharedpreferences.chat.activity.Register.RegisterActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -29,6 +29,9 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         inputEmail = findViewById(R.id.inputLoginEmail)
         inputPassword = findViewById(R.id.inputLoginPassword)
+
+        inputEmail.setText("lucas.carvalhocco@gmail.com")
+        inputPassword.setText("lucas123")
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
@@ -50,8 +53,10 @@ class LoginActivity : AppCompatActivity() {
         if (inputEmail.text.toString() != null && inputEmail.text.toString() != "" &&
             inputPassword.text.toString() != null && inputPassword.text.toString() != ""
         ) {
-            auth.signInWithEmailAndPassword(inputEmail.text.toString(),
-                inputPassword.text.toString())
+            auth.signInWithEmailAndPassword(
+                inputEmail.text.toString(),
+                inputPassword.text.toString()
+            )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
@@ -61,14 +66,17 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
-        }else{
-            Toast.makeText(baseContext, "fill in the fields",
-                Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(
+                baseContext, "fill in the fields",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
-
 }

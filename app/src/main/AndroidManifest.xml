@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SharedPreferences">
         <activity
-            android:name=".HomeActivity"
+            android:name=".chat.activity.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".Register.RegisterActivity"
+            android:name="com.example.sharedpreferences.chat.activity.Register.RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".FirebaseRemote.RemoteConfigActivity"
@@ -26,7 +26,7 @@
             android:name=".SharePreferences.SharePreferences"
             android:exported="true" />
         <activity
-            android:name=".Login.LoginActivity"
+            android:name="com.example.sharedpreferences.chat.activity.Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

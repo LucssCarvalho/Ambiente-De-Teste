@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.Register
+package com.example.sharedpreferences.chat.activity.Register
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -9,13 +9,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.R
-import com.example.sharedpreferences.domain.User
+import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
+import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
+import com.example.sharedpreferences.chat.domain.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -35,11 +35,10 @@ class RegisterActivity : AppCompatActivity() {
         inputEmail = findViewById(R.id.inputRegisterEmail)
         inputPassword = findViewById(R.id.inputRegisterPassword)
 
-        database = Firebase.database.reference
-        auth = Firebase.auth
+        database = getDatabaseReference()
+        auth = getFirebaseAuthentication()
         users = database.child("users")
         button = findViewById(R.id.btnSignUp)
-
 
         var actionBar = supportActionBar
 
@@ -49,6 +48,7 @@ class RegisterActivity : AppCompatActivity() {
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
@@ -56,25 +56,36 @@ class RegisterActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun writeNewUser() {
-        val userData = User(inputName.text.toString(), inputEmail.text.toString())
-        users.push().setValue(userData)
+    private fun saveUser(userName: String, userEmail: String, userUid: String) {
+        val userData = User().apply {
+            name = userName
+            email = userEmail
+            userId = userUid
+        }
+        userData.saveUser()
     }
 
     fun singUp(view: View) {
-        auth.createUserWithEmailAndPassword(inputEmail.text.toString(),
-            inputPassword.text.toString())
+        auth.createUserWithEmailAndPassword(
+            inputEmail.text.toString(),
+            inputPassword.text.toString()
+        )
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
-                    writeNewUser()
+                    val userFirebase: FirebaseUser = task.result.user!!
+                    saveUser(
+                        inputName.text.toString(),
+                        inputEmail.text.toString(),
+                        userFirebase.uid
+                    )
                     finish()
                 } else {
-                    // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
