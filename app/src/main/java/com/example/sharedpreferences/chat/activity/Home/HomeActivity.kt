@@ -38,7 +38,7 @@ class HomeActivity : AppCompatActivity() {
             }
     }
 
-    fun returnUser(dataSnapshot: DataSnapshot): User? {
+    private fun returnUser(dataSnapshot: DataSnapshot): User? {
         return dataSnapshot.getValue<User>()
     }
 
