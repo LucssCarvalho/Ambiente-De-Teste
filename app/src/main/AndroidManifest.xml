@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SharedPreferences">
         <activity
-            android:name=".chat.activity.HomeActivity"
+            android:name=".chat.activity.Home.HomeActivity"
             android:exported="true" />
         <activity
             android:name="com.example.sharedpreferences.chat.activity.Register.RegisterActivity"

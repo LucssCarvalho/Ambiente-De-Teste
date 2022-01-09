@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.R
@@ -21,29 +23,32 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
-    private lateinit var users: DatabaseReference
     private lateinit var button: Button
     private lateinit var inputName: TextInputEditText
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
+    private lateinit var inputRadioGroup: RadioGroup
+    private lateinit var radioButton: RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        setView()
+    }
 
+    private fun setView() {
         inputName = findViewById(R.id.inputRegisterName)
         inputEmail = findViewById(R.id.inputRegisterEmail)
         inputPassword = findViewById(R.id.inputRegisterPassword)
+        inputRadioGroup = findViewById(R.id.radioGroup)
 
         database = getDatabaseReference()
         auth = getFirebaseAuthentication()
-        users = database.child("users")
         button = findViewById(R.id.btnSignUp)
-
         var actionBar = supportActionBar
 
         if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.common_google_signin_btn_icon_dark);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
             actionBar.setHomeButtonEnabled(true)
             actionBar.setDisplayHomeAsUpEnabled(true)
         }
@@ -56,37 +61,40 @@ class RegisterActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun saveUser(userName: String, userEmail: String, userUid: String) {
+    private fun saveUser(userName: String, userEmail: String, password: String, userUid: String) {
         val userData = User().apply {
             name = userName
             email = userEmail
+            userPassword = password
             userId = userUid
+            gender = radioButton.text.toString()
         }
-        userData.saveUser()
+        userData.save()
     }
 
     fun singUp(view: View) {
-        auth.createUserWithEmailAndPassword(
-            inputEmail.text.toString(),
-            inputPassword.text.toString()
-        )
+        val name = inputName.text.toString()
+        val email = inputEmail.text.toString()
+        val password = inputPassword.text.toString()
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Log.d(TAG, "createUserWithEmail:success")
+                    Log.d(TAG, "Your account has been successfully created")
                     val userFirebase: FirebaseUser = task.result.user!!
-                    saveUser(
-                        inputName.text.toString(),
-                        inputEmail.text.toString(),
-                        userFirebase.uid
-                    )
+                    saveUser(name, email, password, userFirebase.uid)
                     finish()
                 } else {
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                    Log.w(TAG, "Error:", task.exception)
                     Toast.makeText(
                         baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
             }
+    }
+
+    fun getGender(view: View) {
+        val radioId: Int = inputRadioGroup.checkedRadioButtonId
+        radioButton = findViewById(radioId)
     }
 }

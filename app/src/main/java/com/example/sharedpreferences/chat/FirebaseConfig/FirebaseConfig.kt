@@ -8,7 +8,7 @@ class FirebaseConfig {
 
     companion object {
         fun getDatabaseReference(): DatabaseReference {
-            return FirebaseDatabase.getInstance().getReference()
+            return FirebaseDatabase.getInstance().reference
         }
 
         fun getFirebaseAuthentication(): FirebaseAuth {

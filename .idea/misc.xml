@@ -3,14 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/drawable-anydpi/ic_add_user.xml" value="0.21875" />
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/drawable-anydpi/ic_arrow_back.xml" value="0.23981481481481481" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.36666666666666664" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/drawable/ic_launcher_background.xml" value="0.36666666666666664" />
-        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_home.xml" value="0.3625" />
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_login.xml" value="0.3625" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_main.xml" value="0.3625" />
-        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_register.xml" value="0.35052083333333334" />
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_register.xml" value="0.2727272727272727" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_remote_config.xml" value="0.35052083333333334" />
         <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/layout/activity_user.xml" value="0.35052083333333334" />
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/mipmap-anydpi-v26/ic_banner.xml" value="0.2564814814814815" />
+        <entry key="..\:/GitHub/Ambiente-De-Teste/app/src/main/res/mipmap-anydpi-v26/ic_macoco.xml" value="0.2564814814814815" />
         <entry key="..\:/Users/lcarvalho1/.gradle/caches/transforms-3/04734857b5ed174dc0953427412d8a79/transformed/jetified-play-services-base-17.1.0/res/drawable/common_google_signin_btn_icon_dark.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/lcarvalho1/Documents/repo/search_UsersGit_java/SharedPreferences/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/lcarvalho1/Documents/repo/search_UsersGit_java/SharedPreferences/app/src/main/res/layout/activity_user.xml" value="0.37592592592592594" />

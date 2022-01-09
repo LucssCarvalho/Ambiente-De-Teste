@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.R
-import com.example.sharedpreferences.chat.activity.HomeActivity
+import com.example.sharedpreferences.chat.activity.Home.HomeActivity
 import com.example.sharedpreferences.chat.activity.Register.RegisterActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
