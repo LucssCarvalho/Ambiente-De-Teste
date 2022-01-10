@@ -22,7 +22,6 @@ class SharePreferences : AppCompatActivity() {
 
     private lateinit var button: Button
     private lateinit var inputName: TextInputEditText;
-    lateinit var inputAge: TextInputEditText;
     lateinit var checked: CheckBox;
     var nameValue: String = ""
     var checkedValue: Boolean = false
@@ -42,7 +41,6 @@ class SharePreferences : AppCompatActivity() {
         checkedValue = checked.isChecked
 
         button.setOnClickListener {
-
             nameValue = inputName.text.toString()
             checkedValue = checked.isChecked
 

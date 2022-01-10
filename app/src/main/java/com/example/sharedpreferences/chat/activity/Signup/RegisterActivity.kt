@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.chat.activity.Register
+package com.example.sharedpreferences.chat.activity.Signup
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -6,8 +6,6 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.R
@@ -15,8 +13,7 @@ import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companio
 import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
 import com.example.sharedpreferences.chat.domain.User
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
 
 class RegisterActivity : AppCompatActivity() {
@@ -27,8 +24,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var inputName: TextInputEditText
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
-    private lateinit var inputRadioGroup: RadioGroup
-    private lateinit var radioButton: RadioButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,13 +33,18 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun setView() {
         inputName = findViewById(R.id.inputRegisterName)
+        inputName.error = "You need to enter a name"
+
         inputEmail = findViewById(R.id.inputRegisterEmail)
+        inputEmail.error = "You need to enter a email address"
+
         inputPassword = findViewById(R.id.inputRegisterPassword)
-        inputRadioGroup = findViewById(R.id.radioGroup)
+        inputPassword.error = "You need to enter a password"
 
         database = getDatabaseReference()
         auth = getFirebaseAuthentication()
         button = findViewById(R.id.btnSignUp)
+
         var actionBar = supportActionBar
 
         if (actionBar != null) {
@@ -67,7 +67,6 @@ class RegisterActivity : AppCompatActivity() {
             email = userEmail
             userPassword = password
             userId = userUid
-            gender = radioButton.text.toString()
         }
         userData.save()
     }
@@ -76,25 +75,40 @@ class RegisterActivity : AppCompatActivity() {
         val name = inputName.text.toString()
         val email = inputEmail.text.toString()
         val password = inputPassword.text.toString()
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "Your account has been successfully created")
-                    val userFirebase: FirebaseUser = task.result.user!!
-                    saveUser(name, email, password, userFirebase.uid)
-                    finish()
-                } else {
-                    Log.w(TAG, "Error:", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-    }
 
-    fun getGender(view: View) {
-        val radioId: Int = inputRadioGroup.checkedRadioButtonId
-        radioButton = findViewById(radioId)
+        if (name != "" && email != "" && password != "") {
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "Your account has been successfully created")
+                        val userFirebase: FirebaseUser = task.result.user!!
+                        saveUser(name, email, password, userFirebase.uid)
+                        auth.signOut()
+                        finish()
+                    } else {
+                        var exception: String = try {
+                            throw task.exception!!
+                        } catch (e: FirebaseAuthWeakPasswordException) {
+                            "Password not strong enough! Must be at least 6 characters"
+                        } catch (e: FirebaseAuthInvalidCredentialsException) {
+                            "Please use a valid email address"
+                        } catch (e: FirebaseAuthUserCollisionException) {
+                            "This e-mail address has already registered"
+                        } catch (e: Exception) {
+                            "Error registering user"
+                        }
+                        Log.w(TAG, "Error:", task.exception)
+                        Toast.makeText(
+                            baseContext, "$exception",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        } else {
+            Toast.makeText(
+                baseContext, "Please complete all required fields!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

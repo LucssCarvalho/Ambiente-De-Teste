@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.activity.Register.RegisterActivity">
+    tools:context=".chat.activity.Signup.RegisterActivity">
 
     <ImageView
         android:id="@+id/imageAddUser"
@@ -85,53 +85,16 @@
 
     <Button
         android:id="@+id/btnSignUp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:gravity="center"
         android:onClick="singUp"
         android:text="sign up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        tools:ignore="MissingConstraints" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentInputPassword"
-        tools:ignore="MissingConstraints">
-
-        <RadioButton
-            android:layout_margin="10dp"
-            android:id="@+id/radio_male"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="getGender"
-            android:text="Male"></RadioButton>
-
-        <RadioButton
-            android:layout_margin="10dp"
-            android:id="@+id/radio_famale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="getGender"
-            android:text="Female"></RadioButton>
-
-        <RadioButton
-            android:layout_margin="10dp"
-            android:id="@+id/radio_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="getGender"
-            android:text="Other"></RadioButton>
-
-    </RadioGroup>
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

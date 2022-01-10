@@ -10,7 +10,6 @@ class User {
     @Exclude
     var userPassword: String = ""
     var email: String = ""
-    var gender: String = ""
 
     fun save(){
        val databaseReference: DatabaseReference = FirebaseConfig.getDatabaseReference()
