@@ -9,16 +9,22 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sharedpreferences.R
+import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig
 import com.example.sharedpreferences.chat.activity.Home.HomeActivity
 import com.example.sharedpreferences.chat.activity.Signup.RegisterActivity
+import com.example.sharedpreferences.chat.domain.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
     private val buttons = mutableListOf<Button>()
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
 
@@ -35,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            startHomeActivity()
+            startHomeActivity(getUser())
         }
     }
 
@@ -44,14 +50,39 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent);
     }
 
-    private fun startHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent);
+    private fun startHomeActivity(userName: String) {
+        if (userName.isNullOrEmpty()) {
+            val intent = Intent(
+                this,
+                HomeActivity::class.java
+            ).putExtra("userName", userName)
+            startActivity(intent)
+        }
+    }
+
+    private fun getUser(): String {
+        var userName = ""
+        database = FirebaseConfig.getDatabaseReference()
+        database.child("users").child(auth.currentUser?.uid.toString()).get()
+            .addOnSuccessListener {
+                Log.i("firebase", "Got value ${it.value}")
+                val user = returnUser(it)
+                if (user != null) {
+                    userName = user.name
+                }
+            }.addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
+        return userName
+    }
+
+    private fun returnUser(dataSnapshot: DataSnapshot): User? {
+        return dataSnapshot.getValue<User>()
     }
 
     fun signIn(view: View) {
-        if (inputEmail.text.toString() != null && inputEmail.text.toString() != "" &&
-            inputPassword.text.toString() != null && inputPassword.text.toString() != ""
+        if (inputEmail.text.toString().isNullOrEmpty() &&
+            inputPassword.text.toString().isNullOrEmpty()
         ) {
             auth.signInWithEmailAndPassword(
                 inputEmail.text.toString(),
@@ -59,12 +90,9 @@ class LoginActivity : AppCompatActivity() {
             )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
                         Log.d(TAG, "signInWithEmail:success")
-                        val user = auth.currentUser
-                        startHomeActivity()
+                        startHomeActivity(getUser())
                     } else {
-                        // If sign in fails, display a message to the user.
                         Log.w(TAG, "signInWithEmail:failure", task.exception)
                         Toast.makeText(
                             baseContext, "Authentication failed.",
