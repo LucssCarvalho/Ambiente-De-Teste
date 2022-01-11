@@ -76,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = inputEmail.text.toString()
         val password = inputPassword.text.toString()
 
-        if (name != "" && email != "" && password != "") {
+        if (name.isNullOrEmpty() && email.isNullOrEmpty() && password.isNullOrEmpty()) {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
