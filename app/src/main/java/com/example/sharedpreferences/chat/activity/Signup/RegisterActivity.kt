@@ -76,10 +76,14 @@ class RegisterActivity : AppCompatActivity() {
         val email = inputEmail.text.toString()
         val password = inputPassword.text.toString()
 
-        if (name.isNullOrEmpty() && email.isNullOrEmpty() && password.isNullOrEmpty()) {
+        if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        Toast.makeText(
+                            baseContext, "Your account has been successfully created!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(TAG, "Your account has been successfully created")
                         val userFirebase: FirebaseUser = task.result.user!!
                         saveUser(name, email, password, userFirebase.uid)
