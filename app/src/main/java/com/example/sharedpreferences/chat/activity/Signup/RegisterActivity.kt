@@ -44,14 +44,6 @@ class RegisterActivity : AppCompatActivity() {
         database = getDatabaseReference()
         auth = getFirebaseAuthentication()
         button = findViewById(R.id.btnSignUp)
-
-        var actionBar = supportActionBar
-
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_arrow_back);
-            actionBar.setHomeButtonEnabled(true)
-            actionBar.setDisplayHomeAsUpEnabled(true)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
