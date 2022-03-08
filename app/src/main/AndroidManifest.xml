@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sharedpreferences">
+    package="com.example.chatKotlin">
 
     <application
-        android:name=".FirebaseRemote.MyApplication"
+        android:name="com.example.chatKotlin.FirebaseRemote.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,22 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".chat.activity.Home.HomeActivity"
+            android:name="com.example.chatKotlin.chat.activity.Home.HomeActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.sharedpreferences.chat.activity.Signup.RegisterActivity"
+            android:name="com.example.chatKotlin.chat.activity.Signup.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".FirebaseRemote.RemoteConfigActivity"
+            android:name="com.example.chatKotlin.FirebaseRemote.RemoteConfigActivity"
             android:exported="true" />
         <activity
-            android:name=".SharePreferences.UserActivity"
+            android:name="com.example.chatKotlin.SharePreferences.UserActivity"
             android:exported="true" />
         <activity
-            android:name=".SharePreferences.SharePreferences"
+            android:name="com.example.chatKotlin.SharePreferences.SharePreferences"
             android:exported="true" />
         <activity
-            android:name="com.example.sharedpreferences.chat.activity.Login.LoginActivity"
+            android:name="com.example.chatKotlin.chat.activity.Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

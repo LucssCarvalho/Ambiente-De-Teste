@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.chat.FirebaseConfig
+package com.example.chatKotlin.chat.FirebaseConfig
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference

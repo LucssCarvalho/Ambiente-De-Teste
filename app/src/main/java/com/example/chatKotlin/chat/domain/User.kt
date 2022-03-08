@@ -1,6 +1,6 @@
-package com.example.sharedpreferences.chat.domain
+package com.example.chatKotlin.chat.domain
 
-import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.Exclude
 

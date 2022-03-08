@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.chat.activity.Signup
+package com.example.chatKotlin.chat.activity.Signup
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.R
-import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
-import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
-import com.example.sharedpreferences.chat.domain.User
+import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
+import com.example.chatKotlin.chat.domain.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference

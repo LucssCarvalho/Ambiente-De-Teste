@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.Utils
+package com.example.chatKotlin.Utils
 
 class FireBaseKeys {
     companion object{

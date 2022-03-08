@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.SharePreferences
+package com.example.chatKotlin.SharePreferences
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.R
-import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.INPUT_NAME
-import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.SHARED_PREF
+import com.example.chatKotlin.R
+import com.example.chatKotlin.Utils.FireBaseKeys.Companion.INPUT_NAME
+import com.example.chatKotlin.Utils.FireBaseKeys.Companion.SHARED_PREF
 
 class UserActivity : AppCompatActivity() {
 

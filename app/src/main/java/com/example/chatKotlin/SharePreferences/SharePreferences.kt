@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.SharePreferences
+package com.example.chatKotlin.SharePreferences
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,10 +8,10 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.R
-import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.CHECKED
-import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.INPUT_NAME
-import com.example.sharedpreferences.Utils.FireBaseKeys.Companion.SHARED_PREF
+import com.example.chatKotlin.R
+import com.example.chatKotlin.Utils.FireBaseKeys.Companion.CHECKED
+import com.example.chatKotlin.Utils.FireBaseKeys.Companion.INPUT_NAME
+import com.example.chatKotlin.Utils.FireBaseKeys.Companion.SHARED_PREF
 import com.google.android.material.textfield.TextInputEditText
 
 class SharePreferences : AppCompatActivity() {

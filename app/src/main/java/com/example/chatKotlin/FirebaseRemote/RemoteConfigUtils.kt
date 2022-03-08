@@ -1,6 +1,6 @@
-package com.example.sharedpreferences.FirebaseRemote
+package com.example.chatKotlin.FirebaseRemote
 
-import com.example.sharedpreferences.R
+import com.example.chatKotlin.R
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings

@@ -1,10 +1,10 @@
-package com.example.sharedpreferences.FirebaseRemote
+package com.example.chatKotlin.FirebaseRemote
 
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.R
+import com.example.chatKotlin.R
 
 class RemoteConfigActivity : AppCompatActivity() {
 

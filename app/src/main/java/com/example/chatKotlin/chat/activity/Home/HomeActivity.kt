@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.chat.activity.Home
+package com.example.chatKotlin.chat.activity.Home
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.sharedpreferences.R
-import com.example.sharedpreferences.chat.FirebaseConfig.FirebaseConfig
-import com.example.sharedpreferences.chat.activity.Login.LoginActivity
+import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {

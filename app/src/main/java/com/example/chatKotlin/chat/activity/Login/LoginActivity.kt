@@ -1,4 +1,4 @@
-package com.example.sharedpreferences.chat.activity.Login
+package com.example.chatKotlin.chat.activity.Login
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.sharedpreferences.R
-import com.example.sharedpreferences.chat.activity.Home.HomeActivity
-import com.example.sharedpreferences.chat.activity.Signup.RegisterActivity
-import com.example.sharedpreferences.chat.domain.User
+import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.activity.Home.HomeActivity
+import com.example.chatKotlin.chat.activity.Signup.RegisterActivity
+import com.example.chatKotlin.chat.domain.User
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth

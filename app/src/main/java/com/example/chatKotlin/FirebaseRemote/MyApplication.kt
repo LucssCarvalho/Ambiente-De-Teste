@@ -1,7 +1,6 @@
-package com.example.sharedpreferences.FirebaseRemote
+package com.example.chatKotlin.FirebaseRemote
 
 import android.app.Application
-import com.example.sharedpreferences.FirebaseRemote.RemoteConfigUtils
 
 class MyApplication : Application() {
 
