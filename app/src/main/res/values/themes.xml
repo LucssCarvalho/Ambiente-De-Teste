@@ -1,4 +1,17 @@
 <resources>
+
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="background">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:itemBackground">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="button_template" parent="Theme.AppCompat.Light">
+        <item name="android:colorButtonNormal">@color/colorPrimaryDarker</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
     </style>
 </resources>

@@ -14,8 +14,8 @@
       android:layout_marginTop="60dp"
       android:textColor="@color/black"
       android:layout_marginBottom="20dp"
-      android:text="Login"
-      android:textSize="30dp"
+      android:text="@string/login"
+      android:textSize="30sp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="48dp"
-        android:hint="username"
+        android:hint="@string/hint_mail"
         android:inputType="textEmailAddress"
         tools:ignore="TouchTargetSizeCheck" />
   </com.google.android.material.textfield.TextInputLayout>
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:height="48dp"
-        android:hint="password"
+        android:hint="@string/hint_password"
         android:inputType="textPassword"
         tools:ignore="TouchTargetSizeCheck" />
 
@@ -69,24 +69,22 @@
       android:id="@+id/loginButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Sign in"
-      android:onClick="signIn"
-      android:backgroundTint="@color/black"
-      android:textColor="@color/white"
-      app:layout_constraintEnd_toEndOf="parent"
       android:layout_marginTop="30dp"
+      android:onClick="signIn"
+      android:text="@string/btn_login"
+      android:theme="@style/button_template"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-      tools:ignore="MissingConstraints" />
+      tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck" />
 
   <Button
       android:id="@+id/btnSignupNavigation"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:onClick="startRegisterActivity"
-      android:text="sign up"
-      android:textColor="@color/white"
-      android:backgroundTint="@color/black"
+      android:text="@string/sign_up"
+      android:theme="@style/button_template"
       android:layout_marginBottom="20dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
