@@ -2,26 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/action_settings"
+    <item
+        android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/item_settings"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/item_logout"
+    <item
+        android:id="@+id/item_logout"
         android:orderInCategory="200"
         android:title="@string/item_logout"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/item_search"
-        android:title="@string/item_search"
+    <item
+        android:id="@+id/item_search"
         android:icon="@drawable/ic_search"
         android:orderInCategory="300"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/item_search"
+        app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/item_addPerson"
+    <item
+        android:id="@+id/item_addPerson"
         android:icon="@drawable/ic_add_person"
         android:orderInCategory="400"
-        app:showAsAction="ifRoom"
-        android:title="AddPerson" />
-
+        android:title="AddPerson"
+        app:showAsAction="ifRoom" />
 </menu>

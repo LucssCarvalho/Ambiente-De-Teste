@@ -85,13 +85,13 @@
 
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:theme="@style/button_template"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:onClick="singUp"
         android:text="@string/btn_signup"
+        android:theme="@style/button_template"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contentInputPassword"

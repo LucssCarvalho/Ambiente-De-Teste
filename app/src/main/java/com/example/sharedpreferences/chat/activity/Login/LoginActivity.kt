@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun validateCurrentUser(){
+    private fun validateCurrentUser() {
         if (auth.currentUser != null) startHomeActivity()
     }
 
