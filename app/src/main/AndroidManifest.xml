@@ -20,12 +20,6 @@
             android:name="com.example.chatKotlin.FirebaseRemote.RemoteConfigActivity"
             android:exported="true" />
         <activity
-            android:name="com.example.chatKotlin.SharePreferences.UserActivity"
-            android:exported="true" />
-        <activity
-            android:name="com.example.chatKotlin.SharePreferences.SharePreferences"
-            android:exported="true" />
-        <activity
             android:name="com.example.chatKotlin.chat.activity.Login.LoginActivity"
             android:exported="true">
             <intent-filter>
