@@ -1,17 +1,23 @@
 package com.example.chatKotlin.chat.activity.Signup
 
 import android.content.ContentValues.TAG
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
+import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.domain.User
+import com.example.chatKotlin.chat.helper.Base64Custom
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
@@ -63,6 +69,13 @@ class RegisterActivity : AppCompatActivity() {
         userData.save()
     }
 
+    fun loginRegisteredUser(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     fun singUp(view: View) {
         val name = inputName.text.toString()
         val email = inputEmail.text.toString()
@@ -77,10 +90,11 @@ class RegisterActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         Log.d(TAG, "Your account has been successfully created")
-                        val userFirebase: FirebaseUser = task.result.user!!
-                        saveUser(name, email, password, userFirebase.uid)
-                        auth.signOut()
-                        finish()
+
+                        val userId: String = Base64Custom().encodeBase64(email)
+                        saveUser(name, email, password, userId)
+                        
+                        loginRegisteredUser()
                     } else {
                         var exception: String = try {
                             throw task.exception!!
