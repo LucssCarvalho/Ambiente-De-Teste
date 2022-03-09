@@ -6,13 +6,19 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.activity.Login.LoginActivity
+import com.example.chatKotlin.chat.helper.SlidingTabLayout
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var slidingTabLayout: SlidingTabLayout
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +26,19 @@ class HomeActivity : AppCompatActivity() {
         auth = FirebaseConfig.getFirebaseAuthentication()
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "wpp"
+        supportActionBar?.title = "\uD83E\uDDA7"
+
+        slidingTabLayout = findViewById(R.id.stl_tabs)
+        viewPager = findViewById(R.id.vp_page)
+
+        slidingTabLayout.setDistributeEvenly(true)
+        slidingTabLayout.setSelectedIndicatorColors(
+            ContextCompat.getColor(this, R.color.colorAccent))
+
+        var tabadapter = TabAdapter(supportFragmentManager)
+        viewPager.adapter = tabadapter
+
+        slidingTabLayout.setViewPager(viewPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

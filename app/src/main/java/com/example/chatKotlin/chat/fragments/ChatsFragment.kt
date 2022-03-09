@@ -1,4 +1,4 @@
-package com.example.chatKotlin.chat.fragments
+package com.example.chatKotlin.chat.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
