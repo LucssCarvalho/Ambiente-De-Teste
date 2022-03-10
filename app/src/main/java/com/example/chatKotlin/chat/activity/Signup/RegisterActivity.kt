@@ -69,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
         userData.save()
     }
 
-    fun loginRegisteredUser(){
+    private fun loginRegisteredUser(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()

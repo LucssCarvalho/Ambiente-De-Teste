@@ -1,10 +1,13 @@
 package com.example.chatKotlin.chat.activity.Home
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
@@ -47,8 +50,12 @@ class HomeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
-        R.id.action_settings -> {
+        R.id.item_settings -> {
             Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
+            true
+        }
+        R.id.item_newContact -> {
+            openNewContact()
             true
         }
         R.id.item_logout -> {
@@ -59,6 +66,24 @@ class HomeActivity : AppCompatActivity() {
         else -> {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun openNewContact() {
+        val editText = EditText(this)
+      val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this).apply {
+          setTitle("New Contact")
+          setMessage("User e-mail")
+          setCancelable(false)
+          setView(editText)
+      }
+
+        alertDialog.setPositiveButton("Add contact") { _, _ -> run {} }
+
+
+        alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
+
+        alertDialog.create()
+        alertDialog.show()
     }
 
     private fun signOut() {
