@@ -4,7 +4,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -16,8 +15,8 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
 import com.example.chatKotlin.chat.activity.Login.LoginActivity
-import com.example.chatKotlin.chat.domain.User
 import com.example.chatKotlin.chat.helper.Base64Custom
+import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.*
 import com.google.firebase.database.DatabaseReference
@@ -59,16 +58,6 @@ class RegisterActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun saveUser(userName: String, userEmail: String, password: String, userUid: String) {
-        val userData = User().apply {
-            name = userName
-            email = userEmail
-            userPassword = password
-            userId = userUid
-        }
-        userData.save()
-    }
-
     private fun loginRegisteredUser(){
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
@@ -85,15 +74,16 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+
+                        val userId: String = Base64Custom().encodeBase64(email)
+                        saveUser(userId)
+
                         Toast.makeText(
                             baseContext, "Your account has been successfully created!",
                             Toast.LENGTH_SHORT
                         ).show()
                         Log.d(TAG, "Your account has been successfully created")
 
-                        val userId: String = Base64Custom().encodeBase64(email)
-                        saveUser(name, email, password, userId)
-                        
                         loginRegisteredUser()
                     } else {
                         var exception: String = try {
@@ -121,4 +111,12 @@ class RegisterActivity : AppCompatActivity() {
             ).show()
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun saveUser(userId: String) {
+        database.child("users").child(userId).setValue(this)
+        val preferences = Preferences(this)
+        preferences.saveUserData(userId)
+    }
+
 }

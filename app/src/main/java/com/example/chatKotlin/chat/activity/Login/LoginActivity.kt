@@ -2,16 +2,20 @@ package com.example.chatKotlin.chat.activity.Login
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.activity.Home.HomeActivity
 import com.example.chatKotlin.chat.activity.Signup.RegisterActivity
-import com.example.chatKotlin.chat.domain.User
+import com.example.chatKotlin.chat.Model.User
+import com.example.chatKotlin.chat.helper.Base64Custom
+import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -22,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
-    private lateinit var user: User
+    private lateinit var user: User<Any?, Any?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,15 +57,15 @@ class LoginActivity : AppCompatActivity() {
         if (auth.currentUser != null) startHomeActivity()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun signIn(view: View) {
-        user = User().apply {
-            email = inputEmail.text.toString()
-            userPassword = inputPassword.text.toString()
-        }
-        if (user.email.isNotEmpty() && user.userPassword.isNotEmpty()) {
-            auth.signInWithEmailAndPassword(user.email, user.userPassword)
+        if (inputEmail.text.toString().isNotEmpty() && inputPassword.text.toString().isNotEmpty()) {
+            auth.signInWithEmailAndPassword(user.email, inputPassword.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+
+                        saveUserPreferences(user.email)
+
                         Log.d(TAG, "signInWithEmail:success")
                         Toast.makeText(this, "Successful login", Toast.LENGTH_LONG).show()
                         startHomeActivity()
@@ -74,5 +78,12 @@ class LoginActivity : AppCompatActivity() {
         } else {
             Toast.makeText(baseContext, "fill in the fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun saveUserPreferences(user: String) {
+        val preferences = Preferences(this)
+        val userId: String = Base64Custom().encodeBase64(user)
+        preferences.saveUserData(userId)
     }
 }

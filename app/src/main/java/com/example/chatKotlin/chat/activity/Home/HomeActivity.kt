@@ -1,32 +1,42 @@
 package com.example.chatKotlin.chat.activity.Home
 
-import android.content.DialogInterface
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.activity.Login.LoginActivity
+import com.example.chatKotlin.chat.Model.User
+import com.example.chatKotlin.chat.helper.Base64Custom
+import com.example.chatKotlin.chat.helper.Preferences
 import com.example.chatKotlin.chat.helper.SlidingTabLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
+    private lateinit var userAuth: FirebaseAuth
     private lateinit var slidingTabLayout: SlidingTabLayout
     private lateinit var viewPager: ViewPager
+    private lateinit var contactId: String
+    private lateinit var firebaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        auth = FirebaseConfig.getFirebaseAuthentication()
+        userAuth = FirebaseConfig.getFirebaseAuthentication()
 
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.title = "\uD83E\uDDA7"
@@ -36,7 +46,8 @@ class HomeActivity : AppCompatActivity() {
 
         slidingTabLayout.setDistributeEvenly(true)
         slidingTabLayout.setSelectedIndicatorColors(
-            ContextCompat.getColor(this, R.color.colorAccent))
+            ContextCompat.getColor(this, R.color.colorAccent)
+        )
 
         var tabadapter = TabAdapter(supportFragmentManager)
         viewPager.adapter = tabadapter
@@ -49,6 +60,7 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.item_settings -> {
             Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
@@ -68,26 +80,65 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun openNewContact() {
-        val editText = EditText(this)
-      val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this).apply {
-          setTitle("New Contact")
-          setMessage("User e-mail")
-          setCancelable(false)
-          setView(editText)
-      }
+        val editTextNewUser = EditText(this)
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this).apply {
+            setTitle("New Contact")
+            setMessage("User e-mail")
+            setCancelable(false)
+            setView(editTextNewUser)
+        }
 
-        alertDialog.setPositiveButton("Add contact") { _, _ -> run {} }
+        alertDialog.setPositiveButton("Add contact") { _, _ ->
+            run {
+                val emailContact = editTextNewUser.text.toString()
+                val context = this
 
+                if (emailContact.isEmpty()) {
+                    Toast.makeText(this, "fill in the contact email", Toast.LENGTH_LONG)
+                } else {
+                    contactId = Base64Custom().encodeBase64(emailContact)
+                    firebaseReference =
+                        FirebaseConfig.getDatabaseReference()
+                            .child("users")
+                            .child(contactId)
 
-        alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
+                    firebaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                        override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-        alertDialog.create()
-        alertDialog.show()
+                            if (dataSnapshot.value != null) {
+                                val user = dataSnapshot.getValue(User::class.java) as User<String, String>
+
+                                val preferences = Preferences(context)
+                                val userIdCurrentUser: String =
+                                    preferences.getIdentification().toString()
+
+                                firebaseReference = FirebaseConfig
+                                    .getDatabaseReference()
+                                    .child("contacts")
+                                    .child(userIdCurrentUser)
+                                    .child(contactId)
+
+                            } else {
+                                Toast.makeText(context, "user not found", Toast.LENGTH_LONG)
+                            }
+                        }
+
+                        override fun onCancelled(error: DatabaseError) {
+                        }
+                    })
+                }
+            }
+            alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
+
+            alertDialog.create()
+            alertDialog.show()
+        }
     }
 
     private fun signOut() {
-        auth.signOut()
+        userAuth.signOut()
         returnLoginActivity()
     }
 
