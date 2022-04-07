@@ -48,7 +48,7 @@ class ContactsFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
 
         listView =  view.findViewById(R.id.lv_contacts)
-        adapter = activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, contacts) }!!
+        adapter = activity?.let { ArrayAdapter(it, R.layout.contact_list, contacts) }!!
 
         listView.adapter = adapter
 
