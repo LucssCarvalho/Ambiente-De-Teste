@@ -25,6 +25,7 @@ class ContactsFragment : Fragment() {
     private var param2: String? = null
     private lateinit var listView: ListView
     private lateinit var contacts: ArrayList<String>
+    private lateinit var adapter: ArrayAdapter<*>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +47,10 @@ class ContactsFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
 
-        listView = view.findViewById(R.id.lv_contacts)
-        activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, contacts) }!!
+        listView =  view.findViewById(R.id.lv_contacts)
+        adapter = activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, contacts) }!!
+
+        listView.adapter = adapter
 
         return view
     }
