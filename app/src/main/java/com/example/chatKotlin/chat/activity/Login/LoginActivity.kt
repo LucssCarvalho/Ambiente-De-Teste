@@ -26,7 +26,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var inputEmail: TextInputEditText
     private lateinit var inputPassword: TextInputEditText
-    private lateinit var user: User<Any?, Any?>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,12 +58,14 @@ class LoginActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun signIn(view: View) {
-        if (inputEmail.text.toString().isNotEmpty() && inputPassword.text.toString().isNotEmpty()) {
-            auth.signInWithEmailAndPassword(user.email, inputPassword.text.toString())
+        val email = inputEmail.text.toString()
+        val password = inputPassword.text.toString()
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
 
-                        saveUserPreferences(user.email)
+                        saveUserPreferences(email)
 
                         Log.d(TAG, "signInWithEmail:success")
                         Toast.makeText(this, "Successful login", Toast.LENGTH_LONG).show()

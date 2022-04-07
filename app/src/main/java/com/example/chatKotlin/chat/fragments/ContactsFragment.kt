@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import com.example.chatKotlin.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,6 +23,9 @@ class ContactsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var listView: ListView
+    private lateinit var contacts: ArrayList<String>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +39,17 @@ class ContactsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contacts, container, false)
+        contacts = ArrayList()
+        contacts.add("Lucas")
+        contacts.add("Lucas2")
+        contacts.add("Lucas3")
+
+        val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
+
+        listView = view.findViewById(R.id.lv_contacts)
+        activity?.let { ArrayAdapter(it, android.R.layout.simple_list_item_1, contacts) }!!
+
+        return view
     }
 
     companion object {

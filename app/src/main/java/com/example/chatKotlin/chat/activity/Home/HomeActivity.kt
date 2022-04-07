@@ -50,6 +50,7 @@ class HomeActivity : AppCompatActivity() {
         )
 
         var tabadapter = TabAdapter(supportFragmentManager)
+
         viewPager.adapter = tabadapter
 
         slidingTabLayout.setViewPager(viewPager)

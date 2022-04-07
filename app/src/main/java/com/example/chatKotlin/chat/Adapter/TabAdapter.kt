@@ -12,9 +12,10 @@ class TabAdapter internal constructor(fm: FragmentManager) : FragmentStatePagerA
     private val titleTabs = listOf("CHATS", "CONTACTS")
 
     override fun getItem(position: Int): Fragment {
+        Log.e("title tabs: " , position.toString())
         return when (position) {
-            1 -> ChatsFragment()
-            2 -> ContactsFragment()
+            0 -> ChatsFragment()
+            1 -> ContactsFragment()
             else -> ChatsFragment()
         }
     }

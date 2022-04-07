@@ -28,6 +28,9 @@
         <entry key="..\:/Users/lcarvalho1/Documents/repo/sharedPreferences/app/src/main/res/layout/activity_remote_config.xml" value="0.25" />
         <entry key="..\:/Users/lcarvalho1/Documents/repo/sharedPreferences/app/src/main/res/layout/activity_user.xml" value="0.25" />
         <entry key="..\:/Users/lcarvalho1/Documents/repo/sharedPreferences/app/src/main/res/xml/default_remote.xml" value="0.36666666666666664" />
+        <entry key="..\:/repo/CHAT-KOTLIN/app/src/main/res/layout/activity_home.xml" value="0.26979166666666665" />
+        <entry key="..\:/repo/CHAT-KOTLIN/app/src/main/res/layout/fragment_chats.xml" value="0.2921195652173913" />
+        <entry key="..\:/repo/CHAT-KOTLIN/app/src/main/res/layout/fragment_contacts.xml" value="0.20104166666666667" />
         <entry key="..\:/repo/sharedPreferences/app/src/main/res/drawable/ic_launcher_background.xml" value="0.31354166666666666" />
         <entry key="..\:/repo/sharedPreferences/app/src/main/res/layout/activity_home.xml" value="0.1828125" />
         <entry key="..\:/repo/sharedPreferences/app/src/main/res/layout/activity_login.xml" value="0.22" />
@@ -38,7 +41,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
