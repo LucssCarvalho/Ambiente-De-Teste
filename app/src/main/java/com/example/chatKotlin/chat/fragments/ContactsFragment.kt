@@ -9,7 +9,13 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.Model.Contact
+import com.example.chatKotlin.chat.Model.User
+import com.example.chatKotlin.chat.helper.Preferences
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +33,7 @@ class ContactsFragment : Fragment() {
     private lateinit var listView: ListView
     private lateinit var contacts: ArrayList<String>
     private lateinit var adapter: ArrayAdapter<*>
-    private lateinit var firebase: DatabaseReference
+    private lateinit var firebaseReference: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +49,6 @@ class ContactsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         contacts = ArrayList()
-        contacts.add("Lucas")
-        contacts.add("Lucas2")
-        contacts.add("Lucas3")
 
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
 
@@ -54,7 +57,28 @@ class ContactsFragment : Fragment() {
 
         listView.adapter = adapter
 
-        firebase = FirebaseConfig.getDatabaseReference()
+        val preferences = Preferences(requireActivity())
+        val userIdCurrentUser: String = preferences.getIdentification().toString()
+
+        firebaseReference = FirebaseConfig
+            .getDatabaseReference()
+            .child("contacts")
+            .child(userIdCurrentUser)
+
+        firebaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                contacts.clear()
+                for(data: DataSnapshot in snapshot.children){
+                   val contact: Contact = data.getValue(Contact::class.java) as Contact
+                   contacts.add(contact.name)
+                }
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
 
         return view
     }

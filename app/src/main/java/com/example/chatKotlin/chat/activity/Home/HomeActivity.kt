@@ -126,9 +126,7 @@ class HomeActivity : AppCompatActivity() {
                                     email = userContact.email
                                     contactId = userContact.userId
                                 }
-
                                 firebaseReference.setValue(contact)
-
                             } else {
                                 Toast.makeText(context, "user not found", Toast.LENGTH_LONG)
                             }
