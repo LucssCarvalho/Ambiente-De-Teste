@@ -35,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         inputEmail = findViewById(R.id.inputLoginEmail)
         inputPassword = findViewById(R.id.inputLoginPassword)
 
-        inputEmail.setText("lucas@gmail.com.br")
+        inputEmail.setText("lucas@gmail.com")
         inputPassword.setText("123456")
 
         validateCurrentUser()

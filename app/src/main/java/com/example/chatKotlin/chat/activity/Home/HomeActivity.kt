@@ -109,8 +109,6 @@ class HomeActivity : AppCompatActivity() {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                             if (dataSnapshot.value != null) {
-                                val user = dataSnapshot.getValue(User::class.java) as User<String, String>
-
                                 val preferences = Preferences(context)
                                 val userIdCurrentUser: String =
                                     preferences.getIdentification().toString()
@@ -120,22 +118,19 @@ class HomeActivity : AppCompatActivity() {
                                     .child("contacts")
                                     .child(userIdCurrentUser)
                                     .child(contactId)
-
                             } else {
                                 Toast.makeText(context, "user not found", Toast.LENGTH_LONG)
                             }
                         }
-
                         override fun onCancelled(error: DatabaseError) {
                         }
                     })
                 }
             }
             alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
-
-            alertDialog.create()
-            alertDialog.show()
         }
+        alertDialog.create()
+        alertDialog.show()
     }
 
     private fun signOut() {

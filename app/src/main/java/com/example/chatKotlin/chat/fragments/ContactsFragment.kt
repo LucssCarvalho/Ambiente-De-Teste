@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.google.firebase.database.DatabaseReference
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,12 +22,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ContactsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var listView: ListView
     private lateinit var contacts: ArrayList<String>
     private lateinit var adapter: ArrayAdapter<*>
+    private lateinit var firebase: DatabaseReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,19 +54,12 @@ class ContactsFragment : Fragment() {
 
         listView.adapter = adapter
 
+        firebase = FirebaseConfig.getDatabaseReference()
+
         return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment contactsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ContactsFragment().apply {

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
+import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
@@ -58,12 +59,6 @@ class RegisterActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun loginRegisteredUser(){
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun singUp(view: View) {
         val name = inputName.text.toString()
@@ -76,7 +71,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val userId: String = Base64Custom().encodeBase64(email)
-                        saveUser(userId)
+                        saveUser(name, email , userId)
 
                         Toast.makeText(
                             baseContext, "Your account has been successfully created!",
@@ -84,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
                         ).show()
                         Log.d(TAG, "Your account has been successfully created")
 
-                        loginRegisteredUser()
+                        finish()
                     } else {
                         var exception: String = try {
                             throw task.exception!!
@@ -112,11 +107,15 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun saveUser(userId: String) {
-        database.child("users").child(userId).setValue(this)
-        val preferences = Preferences(this)
-        preferences.saveUserData(userId)
-    }
+    private fun saveUser(useName: String, userEmail: String, userId64: String) {
+        val userData = User().apply {
+            name = useName
+            email = userEmail
+            userId  = userId64
+        }
+        userData.save()
 
+        val preferences = Preferences(this)
+        preferences.saveUserData(userId64)
+    }
 }
