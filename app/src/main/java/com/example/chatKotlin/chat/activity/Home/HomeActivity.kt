@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Base64Custom
@@ -107,17 +108,27 @@ class HomeActivity : AppCompatActivity() {
 
                     firebaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                            if (dataSnapshot.value != null) {
+                            if (dataSnapshot != null) {
                                 val preferences = Preferences(context)
                                 val userIdCurrentUser: String =
                                     preferences.getIdentification().toString()
+
+                                val userContact: User = dataSnapshot.getValue(User::class.java) as User
 
                                 firebaseReference = FirebaseConfig
                                     .getDatabaseReference()
                                     .child("contacts")
                                     .child(userIdCurrentUser)
                                     .child(contactId)
+
+                                val contact = Contact().apply {
+                                    name = userContact.name
+                                    email = userContact.email
+                                    contactId = userContact.userId
+                                }
+
+                                firebaseReference.setValue(contact)
+
                             } else {
                                 Toast.makeText(context, "user not found", Toast.LENGTH_LONG)
                             }
