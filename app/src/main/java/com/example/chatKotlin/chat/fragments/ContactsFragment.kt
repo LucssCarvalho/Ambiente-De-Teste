@@ -1,16 +1,15 @@
 package com.example.chatKotlin.chat.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import androidx.fragment.app.Fragment
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
-import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -52,7 +51,7 @@ class ContactsFragment : Fragment() {
 
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
 
-        listView =  view.findViewById(R.id.lv_contacts)
+        listView = view.findViewById(R.id.lv_contacts)
         adapter = activity?.let { ArrayAdapter(it, R.layout.contact_list, contacts) }!!
 
         listView.adapter = adapter
@@ -65,12 +64,12 @@ class ContactsFragment : Fragment() {
             .child("contacts")
             .child(userIdCurrentUser)
 
-        firebaseReference.addValueEventListener(object : ValueEventListener{
+        firebaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 contacts.clear()
-                for(data: DataSnapshot in snapshot.children){
-                   val contact: Contact = data.getValue(Contact::class.java) as Contact
-                   contacts.add(contact.name)
+                for (data: DataSnapshot in snapshot.children) {
+                    val contact: Contact = data.getValue(Contact::class.java) as Contact
+                    contacts.add(contact.name)
                 }
                 adapter.notifyDataSetChanged()
             }

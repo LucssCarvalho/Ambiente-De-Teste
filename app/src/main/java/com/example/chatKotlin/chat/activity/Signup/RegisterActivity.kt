@@ -1,7 +1,6 @@
 package com.example.chatKotlin.chat.activity.Signup
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +14,6 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getDatabaseReference
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig.Companion.getFirebaseAuthentication
 import com.example.chatKotlin.chat.Model.User
-import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText
@@ -71,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
 
                         val userId: String = Base64Custom().encodeBase64(email)
-                        saveUser(name, email , userId)
+                        saveUser(name, email, userId)
 
                         Toast.makeText(
                             baseContext, "Your account has been successfully created!",
@@ -111,11 +109,10 @@ class RegisterActivity : AppCompatActivity() {
         val userData = User().apply {
             name = useName
             email = userEmail
-            userId  = userId64
+            userId = userId64
         }
         userData.save()
 
-        val preferences = Preferences(this)
-        preferences.saveUserData(userId64)
+        Preferences(this).saveUserData(userId64)
     }
 }

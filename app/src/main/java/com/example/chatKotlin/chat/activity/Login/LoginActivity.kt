@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.activity.Home.HomeActivity
 import com.example.chatKotlin.chat.activity.Signup.RegisterActivity
-import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText

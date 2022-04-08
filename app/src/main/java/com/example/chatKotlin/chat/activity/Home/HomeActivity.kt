@@ -16,8 +16,8 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
-import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.Model.User
+import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.example.chatKotlin.chat.helper.SlidingTabLayout
@@ -113,7 +113,8 @@ class HomeActivity : AppCompatActivity() {
                                 val userIdCurrentUser: String =
                                     preferences.getIdentification().toString()
 
-                                val userContact: User = dataSnapshot.getValue(User::class.java) as User
+                                val userContact: User =
+                                    dataSnapshot.getValue(User::class.java) as User
 
                                 firebaseReference = FirebaseConfig
                                     .getDatabaseReference()
@@ -131,6 +132,7 @@ class HomeActivity : AppCompatActivity() {
                                 Toast.makeText(context, "user not found", Toast.LENGTH_LONG)
                             }
                         }
+
                         override fun onCancelled(error: DatabaseError) {
                         }
                     })
