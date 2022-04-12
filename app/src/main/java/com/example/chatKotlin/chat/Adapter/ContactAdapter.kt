@@ -23,8 +23,10 @@ class ContactAdapter(c: Context, objects: ArrayList<Contact>) :
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             view = inflater.inflate(R.layout.contact_list, parent, false)
             val nameContact: TextView = view.findViewById(R.id.tv_name)
+            val emailContact: TextView = view.findViewById(R.id.tv_email)
             val contact: Contact = contacts[position]
             nameContact.text = contact.name
+            emailContact.text = contact.email
         }
         return view!!
     }
