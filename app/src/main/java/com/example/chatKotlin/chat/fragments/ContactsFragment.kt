@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.Adapter.ContactAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.helper.Preferences
@@ -30,9 +31,10 @@ class ContactsFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var listView: ListView
-    private lateinit var contacts: ArrayList<String>
+    private lateinit var contacts: ArrayList<Contact>
     private lateinit var adapter: ArrayAdapter<*>
     private lateinit var firebaseReference: DatabaseReference
+    private lateinit var valueEventListenerContact: ValueEventListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +43,16 @@ class ContactsFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        firebaseReference.addValueEventListener(valueEventListenerContact)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        firebaseReference.removeEventListener(valueEventListenerContact)
     }
 
     override fun onCreateView(
@@ -52,7 +64,8 @@ class ContactsFragment : Fragment() {
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
 
         listView = view.findViewById(R.id.lv_contacts)
-        adapter = activity?.let { ArrayAdapter(it, R.layout.contact_list, contacts) }!!
+
+        adapter = ContactAdapter(requireActivity(), contacts)
 
         listView.adapter = adapter
 
@@ -64,21 +77,19 @@ class ContactsFragment : Fragment() {
             .child("contacts")
             .child(userIdCurrentUser)
 
-        firebaseReference.addValueEventListener(object : ValueEventListener {
+        valueEventListenerContact = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 contacts.clear()
                 for (data: DataSnapshot in snapshot.children) {
                     val contact: Contact = data.getValue(Contact::class.java) as Contact
-                    contacts.add(contact.name)
+                    contacts.add(contact)
                 }
                 adapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
-        })
-
+        }
         return view
     }
 
