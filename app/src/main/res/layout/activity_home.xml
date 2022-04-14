@@ -3,18 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chat.activity.HomeActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".chat.activity.HomeActivity">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <com.example.chatKotlin.chat.helper.SlidingTabLayout
         android:id="@+id/stl_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimary"
+        tools:ignore="MissingConstraints" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_page"

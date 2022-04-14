@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/img"
     android:gravity="center"
-    tools:context=".chat.activity.LoginActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".chat.activity.LoginActivity">
 
 
     <com.google.android.material.textfield.TextInputEditText
