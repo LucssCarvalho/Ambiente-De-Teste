@@ -1,4 +1,4 @@
-package com.example.chatKotlin.chat.activity.Login
+package com.example.chatKotlin.chat.activity
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -11,8 +11,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
-import com.example.chatKotlin.chat.activity.Home.HomeActivity
-import com.example.chatKotlin.chat.activity.Signup.RegisterActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText

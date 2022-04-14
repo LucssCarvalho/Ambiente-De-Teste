@@ -1,9 +1,11 @@
 package com.example.chatKotlin.chat.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
@@ -11,6 +13,8 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.ContactAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
+import com.example.chatKotlin.chat.activity.ChatActivity
+import com.example.chatKotlin.chat.activity.LoginActivity
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -90,6 +94,13 @@ class ContactsFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         }
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent,view, position, id ->
+            val intent = Intent(requireActivity(), ChatActivity::class.java)
+
+            startActivity(intent)
+        }
+
         return view
     }
 

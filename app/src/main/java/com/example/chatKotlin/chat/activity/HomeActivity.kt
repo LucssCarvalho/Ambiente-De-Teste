@@ -1,4 +1,4 @@
-package com.example.chatKotlin.chat.activity.Home
+package com.example.chatKotlin.chat.activity
 
 import android.content.Intent
 import android.os.Build
@@ -17,7 +17,6 @@ import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.Model.User
-import com.example.chatKotlin.chat.activity.Login.LoginActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.example.chatKotlin.chat.helper.SlidingTabLayout
