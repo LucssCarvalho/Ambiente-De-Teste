@@ -14,7 +14,6 @@ import com.example.chatKotlin.chat.Adapter.ContactAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.activity.ChatActivity
-import com.example.chatKotlin.chat.activity.LoginActivity
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -99,14 +98,15 @@ class ContactsFragment : Fragment() {
             }
         }
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
-            val intent = Intent(requireActivity(), ChatActivity::class.java)
-            val contact: Contact = contacts[position]
-            intent.putExtra(CONTACT_NAME, contact.name)
-            intent.putExtra(CONTACT_EMAIL, contact.email)
+        listView.onItemClickListener =
+            AdapterView.OnItemClickListener { _, _, position, _ ->
+                val intent = Intent(requireActivity(), ChatActivity::class.java)
+                val contact: Contact = contacts[position]
+                intent.putExtra(CONTACT_NAME, contact.name)
+                intent.putExtra(CONTACT_EMAIL, contact.email)
 
-            startActivity(intent)
-        }
+                startActivity(intent)
+            }
 
         return view
     }
