@@ -59,12 +59,13 @@ class ChatActivity : AppCompatActivity() {
                     userId = idSenderUser
                     message = textMessage
                 }
-                saveMessage(idSenderUser, idRecipientUser, message)
+                sendMessage(idSenderUser, idRecipientUser, message)
+                editMessage.setText("")
             }
         }
     }
 
-    private fun saveMessage(
+    private fun sendMessage(
         idSenderUser: String,
         idRecipientUser: String,
         textMessage: Message
