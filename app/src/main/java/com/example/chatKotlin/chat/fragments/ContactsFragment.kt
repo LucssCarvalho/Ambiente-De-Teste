@@ -40,6 +40,10 @@ class ContactsFragment : Fragment() {
     private lateinit var firebaseReference: DatabaseReference
     private lateinit var valueEventListenerContact: ValueEventListener
 
+    companion object {
+        const val CONTACT_NAME = "contact_name"
+        const val CONTACT_EMAIL = "contact_email"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,23 +99,15 @@ class ContactsFragment : Fragment() {
             }
         }
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { parent,view, position, id ->
+        listView.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val intent = Intent(requireActivity(), ChatActivity::class.java)
+            val contact: Contact = contacts[position]
+            intent.putExtra(CONTACT_NAME, contact.name)
+            intent.putExtra(CONTACT_EMAIL, contact.email)
 
             startActivity(intent)
         }
 
         return view
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ContactsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }
