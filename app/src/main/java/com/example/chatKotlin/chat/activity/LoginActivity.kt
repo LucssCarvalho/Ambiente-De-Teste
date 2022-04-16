@@ -12,6 +12,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_USERS
 import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
@@ -99,7 +100,7 @@ class LoginActivity : AppCompatActivity() {
         val userCurrentId = Base64Custom().encodeBase64(email)
 
         database =
-            FirebaseConfig.getDatabaseReference().child("users")
+            FirebaseConfig.getDatabaseReference().child(FIREBASE_TAG_USERS)
                 .child(userCurrentId)
 
         valueEventListener = object : ValueEventListener {

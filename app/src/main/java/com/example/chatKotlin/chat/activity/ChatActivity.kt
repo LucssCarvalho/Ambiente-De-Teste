@@ -9,6 +9,8 @@ import androidx.appcompat.widget.Toolbar
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.MessageAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_CHATS
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_MESSAGES
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_EMAIL
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_NAME
 import com.example.chatKotlin.chat.Model.Chat
@@ -64,7 +66,7 @@ class ChatActivity : AppCompatActivity() {
         listView.adapter = arrayAdapter
 
         databaseReference =
-            FirebaseConfig.getDatabaseReference().child("messages").child(idSenderUser)
+            FirebaseConfig.getDatabaseReference().child(FIREBASE_TAG_MESSAGES).child(idSenderUser)
                 .child(idRecipientUser)
 
         valueEventListener = (object : ValueEventListener {
@@ -138,7 +140,7 @@ class ChatActivity : AppCompatActivity() {
         chat: Chat
     ): Boolean {
         return try {
-            databaseReference = FirebaseConfig.getDatabaseReference().child("chat")
+            databaseReference = FirebaseConfig.getDatabaseReference().child(FIREBASE_TAG_CHATS)
             databaseReference.child(idSenderUser).child(idRecipientUser).setValue(chat)
             return true
         } catch (e: Exception) {
@@ -153,7 +155,7 @@ class ChatActivity : AppCompatActivity() {
         textMessage: Message
     ): Boolean {
         return try {
-            databaseReference = FirebaseConfig.getDatabaseReference().child("messages")
+            databaseReference = FirebaseConfig.getDatabaseReference().child(FIREBASE_TAG_MESSAGES)
             databaseReference.child(idSenderUser).child(idRecipientUser).push()
                 .setValue(textMessage)
             true

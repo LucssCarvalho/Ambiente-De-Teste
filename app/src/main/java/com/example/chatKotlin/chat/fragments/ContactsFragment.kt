@@ -14,6 +14,7 @@ import com.example.chatKotlin.chat.Adapter.ContactAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.Activity.ChatActivity
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_CONTACTS
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -81,7 +82,7 @@ class ContactsFragment : Fragment() {
 
         firebaseReference = FirebaseConfig
             .getDatabaseReference()
-            .child("contacts")
+            .child(FIREBASE_TAG_CONTACTS)
             .child(userIdCurrentUser)
 
         valueEventListenerContact = object : ValueEventListener {

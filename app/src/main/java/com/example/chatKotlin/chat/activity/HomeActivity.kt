@@ -15,6 +15,8 @@ import androidx.viewpager.widget.ViewPager
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.TabAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_CONTACTS
+import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_USERS
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Base64Custom
@@ -100,7 +102,7 @@ class HomeActivity : AppCompatActivity() {
                     contactId = Base64Custom().encodeBase64(emailContact)
                     firebaseReference =
                         FirebaseConfig.getDatabaseReference()
-                            .child("users")
+                            .child(FIREBASE_TAG_USERS)
                             .child(contactId)
 
                     firebaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -115,7 +117,7 @@ class HomeActivity : AppCompatActivity() {
 
                                 firebaseReference = FirebaseConfig
                                     .getDatabaseReference()
-                                    .child("contacts")
+                                    .child(FIREBASE_TAG_CONTACTS)
                                     .child(userIdCurrentUser)
                                     .child(contactId)
 
