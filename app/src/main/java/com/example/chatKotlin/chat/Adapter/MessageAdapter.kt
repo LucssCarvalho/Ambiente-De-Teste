@@ -18,7 +18,7 @@ class MessageAdapter(context: Context, objects: ArrayList<Message>) :
         var view: View? = null
         if (messages != null) {
 
-            val preferences: Preferences = Preferences(context)
+            val preferences = Preferences(context)
             val idSenderUser = preferences.getIdentification()
 
             val inflater: LayoutInflater =
