@@ -11,7 +11,7 @@ import com.example.chatKotlin.chat.Adapter.MessageAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_EMAIL
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_NAME
-import com.example.chatKotlin.chat.Model.Contact
+import com.example.chatKotlin.chat.Model.Chat
 import com.example.chatKotlin.chat.Model.Message
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
@@ -27,6 +27,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var emailRecipientUserId: String
     private lateinit var idRecipientUser: String
     private lateinit var idSenderUser: String
+    private lateinit var nameSenderUser: String
     private lateinit var editMessage: EditText
     private lateinit var btnSend: ImageButton
     private lateinit var databaseReference: DatabaseReference
@@ -51,6 +52,7 @@ class ChatActivity : AppCompatActivity() {
 
         val preferences = Preferences(this)
         idSenderUser = preferences.getIdentification().toString()
+        nameSenderUser = preferences.getName().toString()
 
         toolbar = findViewById(R.id.tb_chat)
         toolbar.title = nameRecipientUser
@@ -93,12 +95,55 @@ class ChatActivity : AppCompatActivity() {
                     userId = idSenderUser
                     message = textMessage
                 }
-                sendMessage(idSenderUser, idRecipientUser, message)
-                
-                sendMessage(idRecipientUser, idSenderUser, message)
+
+                val returnMessageSender = sendMessage(idSenderUser, idRecipientUser, message)
+                if (!returnMessageSender) {
+                    Toast.makeText(this, "Error save message", Toast.LENGTH_LONG)
+                } else {
+                    val returnMessageRecipient = sendMessage(idRecipientUser, idSenderUser, message)
+                    if (!returnMessageRecipient) {
+                        Toast.makeText(this, "Error send message", Toast.LENGTH_LONG)
+                    }
+                }
+
+                val chat: Chat = Chat().apply {
+                    userId = idRecipientUser
+                    name = nameRecipientUser
+                    lastMessage = textMessage
+                }
+
+                val returnMessageRecipient = saveChat(idSenderUser, idRecipientUser, chat)
+                if (!returnMessageRecipient) {
+                    Toast.makeText(this, "Error save chat", Toast.LENGTH_LONG)
+                } else {
+                    val chat: Chat = Chat().apply {
+                        userId = idSenderUser
+                        name = nameSenderUser
+                        lastMessage = textMessage
+                    }
+                    val returnMessageSender = saveChat(idRecipientUser, idSenderUser, chat)
+                    if (!returnMessageSender) {
+                        Toast.makeText(this, "Error saving chat to destination", Toast.LENGTH_LONG)
+                    }
+                }
 
                 editMessage.setText("")
             }
+        }
+    }
+
+    private fun saveChat(
+        idSenderUser: String,
+        idRecipientUser: String,
+        chat: Chat
+    ): Boolean {
+        return try {
+            databaseReference = FirebaseConfig.getDatabaseReference().child("chat")
+            databaseReference.child(idSenderUser).child(idRecipientUser).setValue(chat)
+            return true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
         }
     }
 
@@ -122,5 +167,4 @@ class ChatActivity : AppCompatActivity() {
         super.onStop()
         databaseReference.removeEventListener(valueEventListener)
     }
-
 }
