@@ -17,7 +17,10 @@ import com.example.chatKotlin.chat.Model.User
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.database.DatabaseReference
 
 class RegisterActivity : AppCompatActivity() {
@@ -112,7 +115,6 @@ class RegisterActivity : AppCompatActivity() {
             userId = userId64
         }
         userData.save()
-
-        Preferences(this).saveUserData(userId64)
+        Preferences(this).saveUserData(userId64, userData.name)
     }
 }
