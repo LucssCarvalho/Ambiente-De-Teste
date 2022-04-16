@@ -11,20 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".chat.activity.ChatActivity"
+            android:name=".chat.Activity.ChatActivity"
             android:exported="true"
-            android:parentActivityName=".chat.activity.HomeActivity"></activity>
+            android:parentActivityName=".chat.Activity.HomeActivity"></activity>
         <activity
-            android:name=".chat.activity.HomeActivity"
+            android:name=".chat.Activity.HomeActivity"
             android:exported="true" />
         <activity
-            android:name=".chat.activity.RegisterActivity"
+            android:name=".chat.Activity.RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".FirebaseRemote.RemoteConfigActivity"
             android:exported="true" />
         <activity
-            android:name=".chat.activity.LoginActivity"
+            android:name=".chat.Activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

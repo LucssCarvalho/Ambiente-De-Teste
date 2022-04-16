@@ -7,7 +7,7 @@
     android:background="@drawable/img"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".chat.activity.LoginActivity">
+    tools:context=".chat.Activity.LoginActivity">
 
 
     <com.google.android.material.textfield.TextInputEditText

@@ -1,4 +1,4 @@
-package com.example.chatKotlin.chat.activity
+package com.example.chatKotlin.chat.Activity
 
 import android.content.ContentValues.TAG
 import android.os.Build

@@ -13,7 +13,7 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.ContactAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Model.Contact
-import com.example.chatKotlin.chat.activity.ChatActivity
+import com.example.chatKotlin.chat.Activity.ChatActivity
 import com.example.chatKotlin.chat.helper.Preferences
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
