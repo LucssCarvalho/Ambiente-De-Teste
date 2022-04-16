@@ -7,6 +7,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.chatKotlin.R
+import com.example.chatKotlin.chat.Adapter.MessageAdapter
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_EMAIL
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_NAME
@@ -30,8 +31,8 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var btnSend: ImageButton
     private lateinit var databaseReference: DatabaseReference
     private lateinit var listView: ListView
-    private lateinit var arrayList: ArrayList<String>
-    private lateinit var arrayAdapter: ArrayAdapter<*>
+    private lateinit var arrayList: ArrayList<Message>
+    private lateinit var arrayAdapter: ArrayAdapter<Message>
     private lateinit var valueEventListener: ValueEventListener
 
 
@@ -57,7 +58,7 @@ class ChatActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         arrayList = ArrayList()
-        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList)
+        arrayAdapter = MessageAdapter(this, arrayList)
         listView.adapter = arrayAdapter
 
         databaseReference =
@@ -70,7 +71,7 @@ class ChatActivity : AppCompatActivity() {
 
                 for (data: DataSnapshot in snapshot.children) {
                     val message: Message = data.getValue(Message::class.java) as Message
-                    arrayList.add(message.message)
+                    arrayList.add(message)
                 }
                 arrayAdapter.notifyDataSetChanged()
             }
