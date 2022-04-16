@@ -94,6 +94,9 @@ class ChatActivity : AppCompatActivity() {
                     message = textMessage
                 }
                 sendMessage(idSenderUser, idRecipientUser, message)
+                
+                sendMessage(idRecipientUser, idSenderUser, message)
+
                 editMessage.setText("")
             }
         }
