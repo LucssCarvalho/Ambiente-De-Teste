@@ -49,9 +49,7 @@ class HomeActivity : AppCompatActivity() {
             ContextCompat.getColor(this, R.color.colorAccent)
         )
 
-        var tabadapter = TabAdapter(supportFragmentManager)
-
-        viewPager.adapter = tabadapter
+        viewPager.adapter = TabAdapter(supportFragmentManager)
 
         slidingTabLayout.setViewPager(viewPager)
     }
