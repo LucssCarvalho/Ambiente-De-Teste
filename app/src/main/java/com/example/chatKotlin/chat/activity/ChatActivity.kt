@@ -81,7 +81,6 @@ class ChatActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 
@@ -91,7 +90,7 @@ class ChatActivity : AppCompatActivity() {
             val textMessage = editMessage.text.toString()
 
             if (textMessage.isEmpty()) {
-                Toast.makeText(this, "Digite uma mensagem para enviar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Enter a message to send", Toast.LENGTH_SHORT).show()
             } else {
                 val message: Message = Message().apply {
                     userId = idSenderUser
