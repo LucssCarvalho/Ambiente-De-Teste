@@ -11,11 +11,11 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="hint_mail">E-mail</string>
+    <string name="hint_send_message">send your message</string>
 
     <!-- TextView -->
     <string name="tv_signup">SIGN UP</string>
     <string name="login">Login</string>
     <string name="sign_up">sign up</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

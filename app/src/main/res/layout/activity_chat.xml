@@ -14,28 +14,27 @@
         android:id="@+id/lv_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        tools:ignore="MissingConstraints"
-        android:layout_below="@+id/tb_chat"
         android:layout_above="@+id/ll_chat"
-        ></ListView>
+        android:layout_below="@+id/tb_chat"
+        android:padding="8dp"
+        tools:ignore="MissingConstraints"></ListView>
 
     <LinearLayout
+        android:id="@+id/ll_chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/white"
-        android:orientation="horizontal"
-        android:id="@+id/ll_chat">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/edit_message"
-            android:paddingLeft="8dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/white"
-            android:hint="Mensagem"
+            android:hint="@string/hint_send_message"
+            android:paddingLeft="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"></EditText>
 
@@ -44,7 +43,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_send_24"
-            android:theme="@style/button_template">
-        </ImageButton>
+            android:theme="@style/button_template"></ImageButton>
     </LinearLayout>
 </RelativeLayout>
