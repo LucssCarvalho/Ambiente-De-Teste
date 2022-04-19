@@ -13,8 +13,14 @@ android {
         targetSdk 31
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    allprojects {
+        configurations.all {
+            resolutionStrategy.force 'org.objenesis:objenesis:2.6'
+        }
     }
 
     buildTypes {
@@ -33,6 +39,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:2.0.1'
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'io.mockk:mockk:1.11.0'
