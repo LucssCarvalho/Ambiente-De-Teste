@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".chat.Activity.LoginActivity">
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="282dp"
+        app:srcCompat="@drawable/home_image" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/inputLoginEmail"
@@ -18,6 +22,8 @@
         android:height="48dp"
         android:hint="@string/hint_mail"
         android:inputType="textEmailAddress"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints,TouchTargetSizeCheck"
         tools:layout_editor_absoluteX="20dp" />
@@ -30,33 +36,36 @@
         android:height="48dp"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/inputLoginEmail"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:onClick="signIn"
-        android:text="@string/btn_login"
-        android:theme="@style/button_template"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputLoginPassword"
-        tools:ignore="MissingConstraints,DuplicateSpeakableTextCheck" />
 
-    <Button
-        android:id="@+id/btnSignupNavigation"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:onClick="startRegisterActivity"
-        android:text="@string/sign_up"
-        android:theme="@style/button_template"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="signIn"
+            android:text="@string/btn_login"
+            android:background="@color/button_green"
+            />
+
+        <Button
+            android:id="@+id/btnSignupNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="startRegisterActivity"
+            android:background="@color/button_blue"
+            android:text="@string/sign_up"/>
+    </LinearLayout>
 
 </LinearLayout>
