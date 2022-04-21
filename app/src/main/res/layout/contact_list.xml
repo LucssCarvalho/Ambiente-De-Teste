@@ -54,7 +54,22 @@
                     android:paddingBottom="8dp"
                     android:text="lucas@gmail.com"
                     android:textColor="@color/colorAccent"></TextView>
-            </LinearLayout>
+
+            <LinearLayout
+                android:paddingLeft="8dp"
+                android:paddingTop="8dp"
+                android:text="Lucas Carvalho"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="8dp"
+                android:paddingBottom="8dp"
+                android:text="lucas@gmail.com"
+                android:textColor="@color/colorPrimary"></TextView>
         </LinearLayout>
         <View style="@style/Divider"/>
     </LinearLayout>
