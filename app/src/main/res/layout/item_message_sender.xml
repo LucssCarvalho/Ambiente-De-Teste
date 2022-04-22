@@ -10,7 +10,7 @@
         android:layout_alignParentRight="true"
         android:background="@color/colorAccent"
         android:padding="8dp"
-        android:textColor="@color/white"
-        android:text="Message sender"></TextView>
+        android:text="Message sender"
+        android:textColor="@color/white"></TextView>
 
 </RelativeLayout>
