@@ -41,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         userAuth = FirebaseConfig.getFirebaseAuthentication()
 
         setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.title = "\uD83E\uDDA7"
+        supportActionBar?.title = "MEU CHAT"
 
         slidingTabLayout = findViewById(R.id.stl_tabs)
         viewPager = findViewById(R.id.vp_page)
