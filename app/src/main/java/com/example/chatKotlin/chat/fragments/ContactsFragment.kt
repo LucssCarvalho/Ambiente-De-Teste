@@ -1,5 +1,6 @@
 package com.example.chatKotlin.chat.Fragments
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.Adapter.ContactAdapter
@@ -34,6 +36,7 @@ class ContactsFragment : Fragment() {
     private lateinit var adapter: ArrayAdapter<*>
     private lateinit var firebaseReference: DatabaseReference
     private lateinit var valueEventListenerContact: ValueEventListener
+    private lateinit var progressBar: ProgressDialog
 
     companion object {
         const val CONTACT_NAME = "contact_name"
@@ -62,6 +65,13 @@ class ContactsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        progressBar = ProgressDialog(requireActivity()).apply {
+            setTitle("LOADING DATA")
+            setMessage("wait a moment")
+        }
+
+        progressBar.show()
+
         contacts = ArrayList()
 
         val view: View = inflater.inflate(R.layout.fragment_contacts, container, false)
@@ -88,6 +98,7 @@ class ContactsFragment : Fragment() {
                     contacts.add(contact)
                 }
                 adapter.notifyDataSetChanged()
+                progressBar.dismiss();
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -107,3 +118,4 @@ class ContactsFragment : Fragment() {
         return view
     }
 }
+

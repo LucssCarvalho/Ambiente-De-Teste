@@ -107,13 +107,12 @@ class HomeActivity : AppCompatActivity() {
 
                     firebaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
-                            if (dataSnapshot != null) {
+                            if (dataSnapshot.value != null) {
                                 val preferences = Preferences(context)
                                 val userIdCurrentUser: String =
                                     preferences.getIdentification().toString()
 
-                                val userContact: User =
-                                    dataSnapshot.getValue(User::class.java) as User
+                                val userContact: User = dataSnapshot.getValue(User::class.java) as User
 
                                 firebaseReference = FirebaseConfig
                                     .getDatabaseReference()
