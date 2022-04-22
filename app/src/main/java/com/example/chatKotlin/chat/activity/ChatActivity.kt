@@ -21,6 +21,9 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ChatActivity : AppCompatActivity() {
 
@@ -92,9 +95,14 @@ class ChatActivity : AppCompatActivity() {
             if (textMessage.isEmpty()) {
                 Toast.makeText(this, "Enter a message to send", Toast.LENGTH_SHORT).show()
             } else {
+
+                val sdf = SimpleDateFormat("hh:mm")
+                val currentDate = sdf.format(Date())
+
                 val message: Message = Message().apply {
                     userId = idSenderUser
                     message = textMessage
+                    hourMessage = currentDate
                 }
 
                 val returnMessageSender = sendMessage(idSenderUser, idRecipientUser, message)

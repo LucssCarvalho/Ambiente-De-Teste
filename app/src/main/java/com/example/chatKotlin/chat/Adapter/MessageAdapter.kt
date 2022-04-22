@@ -33,7 +33,9 @@ class MessageAdapter(context: Context, objects: ArrayList<Message>) :
             }
 
             val tvMessage: TextView = view.findViewById(R.id.tv_message)
+            val tvHourMessage: TextView = view.findViewById(R.id.tv_hour_send_message)
             tvMessage.text = message.message
+            tvHourMessage.text = message.hourMessage
         }
         return view!!
     }

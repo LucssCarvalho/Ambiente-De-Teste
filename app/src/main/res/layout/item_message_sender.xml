@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true">
 
-    <TextView
-        android:id="@+id/tv_message"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:background="@color/colorAccent"
-        android:padding="8dp"
-        android:text="Message sender"
-        android:textColor="@color/white"></TextView>
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:padding="8dp"
+            android:text="Message sender"
+            android:textColor="@color/white"></TextView>
+
+        <TextView
+            android:id="@+id/tv_hour_send_message"
+            android:layout_width="match_parent"
+            android:paddingLeft="8dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="00:00"></TextView>
+    </LinearLayout>
 
 </RelativeLayout>
