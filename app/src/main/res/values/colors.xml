@@ -15,4 +15,5 @@
     <color name="button_green">#507A4D</color>
     <color name="button_blue">#2C86AD</color>
     <color name="background_blue">#CAEBF9</color>
+    <color name="background_widget_settings">#AEC0C8</color>
 </resources>

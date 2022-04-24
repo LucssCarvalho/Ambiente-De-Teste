@@ -11,9 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".chat.activity.SettingsActivity"
+            android:exported="true" />
+        <activity
             android:name=".chat.Activity.ChatActivity"
             android:exported="true"
-            android:parentActivityName=".chat.Activity.HomeActivity"></activity>
+            android:parentActivityName=".chat.Activity.HomeActivity" />
         <activity
             android:name=".chat.Activity.HomeActivity"
             android:exported="true" />
@@ -28,6 +31,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

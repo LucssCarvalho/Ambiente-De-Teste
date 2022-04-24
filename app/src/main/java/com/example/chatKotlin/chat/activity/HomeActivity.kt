@@ -19,6 +19,7 @@ import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_CON
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_USERS
 import com.example.chatKotlin.chat.Model.Contact
 import com.example.chatKotlin.chat.Model.User
+import com.example.chatKotlin.chat.activity.SettingsActivity
 import com.example.chatKotlin.chat.helper.Base64Custom
 import com.example.chatKotlin.chat.helper.Preferences
 import com.example.chatKotlin.chat.helper.SlidingTabLayout
@@ -48,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
 
         slidingTabLayout.setDistributeEvenly(true)
         slidingTabLayout.setSelectedIndicatorColors(
-            ContextCompat.getColor(this, R.color.colorAccent)
+            ContextCompat.getColor(this, R.color.button_green)
         )
 
         viewPager.adapter = TabAdapter(supportFragmentManager)
@@ -64,7 +65,7 @@ class HomeActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.item_settings -> {
-            Toast.makeText(this, "Settings", Toast.LENGTH_LONG).show()
+            openSettings()
             true
         }
         R.id.item_newContact -> {
@@ -79,6 +80,12 @@ class HomeActivity : AppCompatActivity() {
         else -> {
             super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun openSettings(){
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
