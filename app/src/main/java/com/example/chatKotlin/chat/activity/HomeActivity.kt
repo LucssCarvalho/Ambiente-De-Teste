@@ -143,8 +143,8 @@ class HomeActivity : AppCompatActivity() {
                     })
                 }
             }
-            alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
         }
+        alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
         alertDialog.create()
         alertDialog.show()
     }

@@ -12,10 +12,7 @@ import com.example.chatKotlin.R
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseConfig
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils
 import com.example.chatKotlin.chat.helper.Preferences
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
@@ -78,9 +75,11 @@ class SettingsActivity : AppCompatActivity() {
                     statusTextView.text = statusMessage
                 }
             }
-            alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
         }
-        alertDialog.create()
-        alertDialog.show()
+        alertDialog.setNegativeButton("Cancel") { _, _ -> run {} }
+
+        val alert: AlertDialog = alertDialog.create()
+        alert.setCanceledOnTouchOutside(false)
+        alert.show()
     }
 }
