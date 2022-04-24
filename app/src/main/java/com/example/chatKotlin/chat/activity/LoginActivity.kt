@@ -67,9 +67,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveUserPreferences(userId: String, userName: String) {
+    private fun saveUserPreferences(userId: String, userName: String, status: String) {
         val preferences = Preferences(this)
         preferences.saveUserData(userId, userName)
+        preferences.saveStatus(status)
     }
 
     private fun createView() {
@@ -106,7 +107,7 @@ class LoginActivity : AppCompatActivity() {
         valueEventListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val currentUser: User = snapshot.getValue(User::class.java) as User
-                saveUserPreferences(userCurrentId, currentUser.name)
+                saveUserPreferences(userCurrentId, currentUser.name, currentUser.status)
             }
 
             override fun onCancelled(error: DatabaseError) {

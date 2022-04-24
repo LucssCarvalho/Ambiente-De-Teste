@@ -41,6 +41,7 @@ class ContactsFragment : Fragment() {
     companion object {
         const val CONTACT_NAME = "contact_name"
         const val CONTACT_EMAIL = "contact_email"
+        const val CONTACT_STATUS = "contact_status"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,6 +112,7 @@ class ContactsFragment : Fragment() {
                 val contact: Contact = contacts[position]
                 intent.putExtra(CONTACT_NAME, contact.name)
                 intent.putExtra(CONTACT_EMAIL, contact.email)
+                intent.putExtra(CONTACT_STATUS, contact.status)
 
                 startActivity(intent)
             }

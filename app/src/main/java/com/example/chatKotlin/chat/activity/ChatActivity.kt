@@ -13,6 +13,7 @@ import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_CHA
 import com.example.chatKotlin.chat.FirebaseConfig.FirebaseUtils.FIREBASE_TAG_MESSAGES
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_EMAIL
 import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_NAME
+import com.example.chatKotlin.chat.Fragments.ContactsFragment.Companion.CONTACT_STATUS
 import com.example.chatKotlin.chat.Model.Chat
 import com.example.chatKotlin.chat.Model.Message
 import com.example.chatKotlin.chat.helper.Base64Custom
@@ -33,6 +34,7 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var idRecipientUser: String
     private lateinit var idSenderUser: String
     private lateinit var nameSenderUser: String
+    private lateinit var statusRecipientUser: String
     private lateinit var editMessage: EditText
     private lateinit var btnSend: ImageButton
     private lateinit var databaseReference: DatabaseReference
@@ -53,6 +55,7 @@ class ChatActivity : AppCompatActivity() {
         val extra: Bundle = intent.extras!!
         nameRecipientUser = extra.getString(CONTACT_NAME, "")
         emailRecipientUserId = extra.getString(CONTACT_EMAIL, "")
+        statusRecipientUser = extra.getString(CONTACT_STATUS, "")
         idRecipientUser = Base64Custom().encodeBase64(emailRecipientUserId)
 
         val preferences = Preferences(this)
@@ -62,6 +65,7 @@ class ChatActivity : AppCompatActivity() {
         toolbar = findViewById(R.id.tb_chat)
         toolbar.title = nameRecipientUser
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        toolbar.subtitle = statusRecipientUser
         setSupportActionBar(toolbar)
 
         arrayList = ArrayList()
@@ -119,6 +123,7 @@ class ChatActivity : AppCompatActivity() {
                     userId = idRecipientUser
                     name = nameRecipientUser
                     lastMessage = textMessage
+                    status = statusRecipientUser
                 }
 
                 val returnMessageRecipient = saveChat(idSenderUser, idRecipientUser, chat)

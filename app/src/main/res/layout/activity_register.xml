@@ -44,6 +44,7 @@
             android:id="@+id/inputRegisterName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="@color/black"
             android:hint="@string/hint_username"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -64,6 +65,7 @@
             android:id="@+id/inputRegisterEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="@color/black"
             android:hint="@string/hint_mail"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/black" />
@@ -85,6 +87,7 @@
             android:id="@+id/inputRegisterPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="@color/black"
             android:hint="@string/hint_password" />
 
     </com.google.android.material.textfield.TextInputLayout>

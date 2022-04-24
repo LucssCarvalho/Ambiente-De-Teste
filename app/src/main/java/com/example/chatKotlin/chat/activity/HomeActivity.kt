@@ -85,7 +85,6 @@ class HomeActivity : AppCompatActivity() {
     private fun openSettings(){
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
-        finish()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -131,6 +130,7 @@ class HomeActivity : AppCompatActivity() {
                                     name = userContact.name
                                     email = userContact.email
                                     contactId = userContact.userId
+                                    status = userContact.status
                                 }
                                 firebaseReference.setValue(contact)
                             } else {

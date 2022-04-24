@@ -116,6 +116,7 @@ class ChatsFragment : Fragment() {
                 val email = Base64Custom().decodeBase64(chat.userId)
                 intent.putExtra(ContactsFragment.CONTACT_NAME, chat.name)
                 intent.putExtra(ContactsFragment.CONTACT_EMAIL, email)
+                intent.putExtra(ContactsFragment.CONTACT_STATUS, chat.status)
                 startActivity(intent)
             }
 

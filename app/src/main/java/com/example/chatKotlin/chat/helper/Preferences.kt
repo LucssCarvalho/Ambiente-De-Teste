@@ -8,6 +8,7 @@ class Preferences(context: Context) {
     private var CURRENT_USER_ID = "current_user_id"
     private var CURRENT_USER_NAME = "current_user_name"
     private var CHAT_FIREBASE_ID = "chat_firebase"
+    private var CURRENT_STATUS = "current_status"
     private var editor: SharedPreferences.Editor
     private var preferences: SharedPreferences
     private var MODE = 0
@@ -23,7 +24,14 @@ class Preferences(context: Context) {
         editor.commit()
     }
 
+    fun saveStatus(status: String) {
+        editor.putString(CURRENT_STATUS, status)
+        editor.commit()
+    }
+
     fun getIdentification() = preferences.getString(CURRENT_USER_ID, null)
+
+    fun getStatus() = preferences.getString(CURRENT_STATUS, null)
 
     fun getName() = preferences.getString(CURRENT_USER_NAME, null)
 }
