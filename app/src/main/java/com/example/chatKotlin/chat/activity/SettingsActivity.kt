@@ -2,6 +2,7 @@ package com.example.chatKotlin.chat.activity
 
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -18,7 +19,7 @@ import com.google.firebase.database.ValueEventListener
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var toolbar: Toolbar
-    private lateinit var statusButton: TextView
+    private lateinit var statusButton: LinearLayout
     private lateinit var nameTextView: TextView
     private lateinit var statusTextView: TextView
     private lateinit var firebaseReference: DatabaseReference
@@ -39,7 +40,7 @@ class SettingsActivity : AppCompatActivity() {
         nameTextView.text = preferences.getName().toString()
         statusTextView.text = preferences.getStatus().toString()
 
-        statusButton = findViewById(R.id.tv_status_settings)
+        statusButton = findViewById(R.id.btn_set_status)
 
         statusButton.setOnClickListener {
             updateStatus()

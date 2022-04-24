@@ -59,7 +59,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/btn_set_background"
+        android:id="@+id/btn_set_status"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_centerHorizontal="true"
@@ -73,7 +73,7 @@
             android:layout_width="38dp"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:src="@drawable/ic_baseline_imagesearch_roller_24"></ImageView>
+            android:src="@drawable/ic_baseline_subtitles_24"></ImageView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -81,14 +81,14 @@
             android:gravity="center"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            android:text="Background"
+            android:text="Update Status"
             android:textColor="@color/black"
             android:textSize="20dp"></TextView>
     </LinearLayout>
 
     <View
         style="@style/Divider"
-        app:layout_constraintTop_toBottomOf="@+id/btn_set_background"
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_status"
         tools:ignore="MissingConstraints" />
 
 
@@ -100,7 +100,7 @@
         android:padding="8dp"
         app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/btn_set_background"
+        app:layout_constraintTop_toBottomOf="@+id/btn_set_status"
         tools:ignore="MissingConstraints">
 
         <ImageView
