@@ -17,8 +17,8 @@
         android:layout_above="@+id/ll_chat"
         android:layout_below="@+id/tb_chat"
         android:padding="8dp"
-        android:transcriptMode="alwaysScroll"
         android:stackFromBottom="true"
+        android:transcriptMode="alwaysScroll"
         tools:ignore="MissingConstraints"></ListView>
 
     <LinearLayout
