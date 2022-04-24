@@ -9,6 +9,7 @@ class User {
     @Exclude
     var userId: String = ""
     var name: String = ""
+    var status: String = ""
 
     @Exclude
     var email: String = ""
